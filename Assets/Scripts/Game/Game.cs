@@ -144,6 +144,13 @@ public class Game : MonoBehaviour
         Destroy(ob, 1);
     }
 
+    public void LoadMage(Vector3 pos)
+    {
+        GameObject ob = Instantiate(MagePrefabs[0]);
+        ob.transform.position = new Vector3(pos.x, ob.transform.position.y, pos.z);
+        ob.transform.SetParent(GameObject.Find("MageParent").transform);
+    }
+
     void Update()
     {
         // Kiểm tra sự kiện thoát game
