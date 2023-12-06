@@ -39,6 +39,7 @@ public class Game : MonoBehaviour
     public LevelData levelData;
     public List<int> LoadDataMageId = new List<int>();
     public TextAsset textJSON;
+    public double coin;
 
     private void Awake()
     {
@@ -48,6 +49,9 @@ public class Game : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        coin = 1000;
+        string result = ShortenMoney.ConvertCoin(coin);
+        Debug.Log(result);
         // UpLevel();
     }
 

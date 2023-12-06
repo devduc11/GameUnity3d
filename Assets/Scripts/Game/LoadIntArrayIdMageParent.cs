@@ -45,7 +45,7 @@ public class LoadIntArrayIdMageParent : MonoBehaviour
                 for (int i = 0; i < loadedWrapper.intArray.Length; i++)
                 {
                     Game.game.LoadDataMageId.Add(loadedWrapper.intArray[i]);
-                    Debug.Log("Giá trị " + i + ": " + loadedWrapper.intArray[i]);
+                    // Debug.Log("Giá trị " + i + ": " + loadedWrapper.intArray[i]);
                 }
             }
             else

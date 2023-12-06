@@ -23,7 +23,7 @@ public class LoadVectorArrayMageParent : MonoBehaviour
         // string newFolderPath = "Assets/Scripts/Data/";
         // string newFilePath = Path.Combine(newFolderPath, "VectorArrayDataMageParent.json");
         // filePath = newFilePath;
-        LoadPositions();
+        // LoadPositions();
     }
 
     private void LoadPositions()
@@ -46,7 +46,7 @@ public class LoadVectorArrayMageParent : MonoBehaviour
                     Game.game.LoadDataMage(loadedWrapper.vectorArray[i], i);
                     // Transform childTransform = ArrayPlayer.GetChild(i).transform;
                     // childTransform.position = loadedWrapper.vectorArray[i];
-                    Debug.Log("Vị trí " + i + ": " + loadedWrapper.vectorArray[i]);
+                    // Debug.Log("Vị trí " + i + ": " + loadedWrapper.vectorArray[i]);
                 }
             }
             else
