@@ -29,11 +29,13 @@ public class Game : MonoBehaviour
 {
     public static Game game;
     public SaveVectorArrayMageParent saveVectorArrayMageParent;
+    public SaveIntArrayIdMageParent saveIntArrayIdMageParent;
     public Transform BoxParent, zombieParent, PosZombie, BulletParent;
     public GameObject[] MagePrefabs, zombiePrefab, effectPrefabs, BulletPrefabs;
     public int MageLevelUp;
     public int level;
     public LevelData levelData;
+    public List<int> LoadDataMageId = new List<int>();
 
     private void Awake()
     {
@@ -144,9 +146,10 @@ public class Game : MonoBehaviour
         Destroy(ob, 1);
     }
 
-    public void LoadMage(Vector3 pos)
+    public void LoadDataMage(Vector3 pos, int index)
     {
-        GameObject ob = Instantiate(MagePrefabs[0]);
+        int id = LoadDataMageId[index];
+        GameObject ob = Instantiate(MagePrefabs[id]);
         ob.transform.position = new Vector3(pos.x, ob.transform.position.y, pos.z);
         ob.transform.SetParent(GameObject.Find("MageParent").transform);
     }
@@ -164,6 +167,7 @@ public class Game : MonoBehaviour
     {
         // Xử lý khi ứng dụng game đang thoát
         saveVectorArrayMageParent.UpSave();
+        saveIntArrayIdMageParent.UpSave();
         HandleGameExit();
     }
 

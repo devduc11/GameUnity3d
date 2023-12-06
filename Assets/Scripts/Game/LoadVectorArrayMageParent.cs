@@ -43,10 +43,10 @@ public class LoadVectorArrayMageParent : MonoBehaviour
                 // Lặp qua mảng Vector3 và in ra vị trí
                 for (int i = 0; i < loadedWrapper.vectorArray.Length; i++)
                 {
-                    Game.game.LoadMage(loadedWrapper.vectorArray[i]);
+                    Game.game.LoadDataMage(loadedWrapper.vectorArray[i], i);
                     // Transform childTransform = ArrayPlayer.GetChild(i).transform;
                     // childTransform.position = loadedWrapper.vectorArray[i];
-                    Debug.Log("Vị trí " + i + ": " + loadedWrapper.vectorArray[i]);
+                    // Debug.Log("Vị trí " + i + ": " + loadedWrapper.vectorArray[i]);
                 }
             }
             else

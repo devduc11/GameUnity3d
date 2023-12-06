@@ -71,6 +71,6 @@ public class SaveVectorArrayMageParent : MonoBehaviour
         // Ghi chuỗi JSON vào tệp
         File.WriteAllText(filePath, json);
 
-        Debug.Log("Dữ liệu Vector3 đã được lưu vào " + filePath);
+        // Debug.Log("Dữ liệu Vector3 đã được lưu vào " + filePath);
     }
 }
