@@ -17,11 +17,11 @@ public class SaveIntArrayIdMageParent : MonoBehaviour
     void Start()
     {
         ArrayPlayer = GameObject.Find("MageParent").transform;
-        string newFolderPath = "Assets/Scripts/Data/";
-        string newFilePath = Path.Combine(newFolderPath, "IntArrayDataIdMageParent.json");
+        // string newFolderPath = "Assets/Scripts/Data/";
+        // string newFilePath = Path.Combine(newFolderPath, "IntArrayDataIdMageParent.json");
         // Thiết lập đường dẫn tới tệp JSON
-        // filePath = Path.Combine(Application.persistentDataPath, "IntArrayDataIdMageParent.json");
-        filePath = newFilePath;
+        filePath = Path.Combine(Application.persistentDataPath, "IntArrayDataIdMageParent.json");
+        // filePath = newFilePath;
 
         // Gọi hàm để lưu dữ liệu
         // SaveIntegers();
@@ -57,6 +57,6 @@ public class SaveIntArrayIdMageParent : MonoBehaviour
         // Ghi chuỗi JSON vào tệp
         File.WriteAllText(filePath, json);
 
-        Debug.Log("Dữ liệu mảng số nguyên đã được lưu vào " + filePath);
+        // Debug.Log("Dữ liệu mảng số nguyên đã được lưu vào " + filePath);
     }
 }

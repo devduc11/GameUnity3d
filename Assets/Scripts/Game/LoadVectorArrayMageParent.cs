@@ -19,10 +19,10 @@ public class LoadVectorArrayMageParent : MonoBehaviour
     {
         ArrayPlayer = GameObject.Find("MageParent").transform;
         // Thiết lập đường dẫn tới tệp JSON
-        // filePath = Path.Combine(Application.persistentDataPath, "VectorArrayData.json");
-        string newFolderPath = "Assets/Scripts/Data/";
-        string newFilePath = Path.Combine(newFolderPath, "VectorArrayDataMageParent.json");
-        filePath = newFilePath;
+        filePath = Path.Combine(Application.persistentDataPath, "VectorArrayDataMageParent.json");
+        // string newFolderPath = "Assets/Scripts/Data/";
+        // string newFilePath = Path.Combine(newFolderPath, "VectorArrayDataMageParent.json");
+        // filePath = newFilePath;
         LoadPositions();
     }
 
@@ -46,7 +46,7 @@ public class LoadVectorArrayMageParent : MonoBehaviour
                     Game.game.LoadDataMage(loadedWrapper.vectorArray[i], i);
                     // Transform childTransform = ArrayPlayer.GetChild(i).transform;
                     // childTransform.position = loadedWrapper.vectorArray[i];
-                    // Debug.Log("Vị trí " + i + ": " + loadedWrapper.vectorArray[i]);
+                    Debug.Log("Vị trí " + i + ": " + loadedWrapper.vectorArray[i]);
                 }
             }
             else
@@ -56,7 +56,7 @@ public class LoadVectorArrayMageParent : MonoBehaviour
         }
         else
         {
-            Debug.Log("Tệp không tồn tại: " + filePath);
+            // Debug.Log("Tệp không tồn tại: " + filePath);
         }
     }
 }

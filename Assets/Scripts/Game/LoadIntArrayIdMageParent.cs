@@ -17,11 +17,11 @@ public class LoadIntArrayIdMageParent : MonoBehaviour
     void Start()
     {
         ArrayPlayer = GameObject.Find("MageParent").transform;
-        string newFolderPath = "Assets/Scripts/Data/";
-        string newFilePath = Path.Combine(newFolderPath, "IntArrayDataIdMageParent.json");
+        // string newFolderPath = "Assets/Scripts/Data/";
+        // string newFilePath = Path.Combine(newFolderPath, "IntArrayDataIdMageParent.json");
         // Thiết lập đường dẫn tới tệp JSON
-        // filePath = Path.Combine(Application.persistentDataPath, "IntArrayDataIdMageParent.json");
-        filePath = newFilePath;
+        filePath = Path.Combine(Application.persistentDataPath, "IntArrayDataIdMageParent.json");
+        // filePath = newFilePath;
 
         // Gọi hàm để tải dữ liệu
         LoadIntegers();

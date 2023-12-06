@@ -13,22 +13,23 @@ public class SaveVectorArrayMageParent : MonoBehaviour
     public Transform ArrayPlayer;
     // Đường dẫn của tệp JSON
     private string filePath;
+
     // Start is called before the first frame update
     void Start()
     {
         ArrayPlayer = GameObject.Find("MageParent").transform;
         // Thiết lập đường dẫn tới tệp JSON
-        // filePath = Path.Combine(Application.persistentDataPath, "VectorArrayDataMageParent.json");
+        filePath = Path.Combine(Application.persistentDataPath, "VectorArrayDataMageParent.json");
         // Đường dẫn mới bạn muốn lưu trữ tệp JSON
-        string newFolderPath = "Assets/Scripts/Data/";
-        string newFilePath = Path.Combine(newFolderPath, "VectorArrayDataMageParent.json");
+        // string newFolderPath = "Assets/Scripts/Data/";
+        // string newFilePath = Path.Combine(newFolderPath, "VectorArrayDataMageParent.json");
 
-        // Kiểm tra xem thư mục có tồn tại chưa, nếu không thì tạo mới
-        if (!Directory.Exists(newFolderPath))
-        {
-            Directory.CreateDirectory(newFolderPath);
-        }
-        filePath = newFilePath;
+        // // Kiểm tra xem thư mục có tồn tại chưa, nếu không thì tạo mới
+        // if (!Directory.Exists(newFolderPath))
+        // {
+        //     Directory.CreateDirectory(newFolderPath);
+        // }
+        // filePath = newFilePath;
 
         // Gọi hàm để lưu dữ liệu
     }

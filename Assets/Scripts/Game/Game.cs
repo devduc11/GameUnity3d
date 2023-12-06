@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 using DG.Tweening;
+using System.IO;
+using UnityEngine.Networking;
 
 [System.Serializable]
 public class Enemy1
@@ -36,6 +38,7 @@ public class Game : MonoBehaviour
     public int level;
     public LevelData levelData;
     public List<int> LoadDataMageId = new List<int>();
+    public TextAsset textJSON;
 
     private void Awake()
     {
@@ -50,10 +53,10 @@ public class Game : MonoBehaviour
 
     public void UpLevel()
     {
-        string json = System.IO.File.ReadAllText("Assets/Scripts/Data/Level.json");
-
+        // string json = System.IO.File.ReadAllText("Assets/Scripts/Data/Level.json");
         // Chuyển đổi JSON thành đối tượng LevelData
-        levelData = JsonUtility.FromJson<LevelData>(json);
+        // levelData = JsonUtility.FromJson<LevelData>(json);
+        levelData = JsonUtility.FromJson<LevelData>(textJSON.text);
         int indexLevel = levelData.levels[level].level;
         // In ra thông tin của mỗi cấp độ
         foreach (var enemy in levelData.levels[level].enemies)
@@ -159,21 +162,21 @@ public class Game : MonoBehaviour
         // Kiểm tra sự kiện thoát game
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            HandleGameExit();
         }
+        HandleGameExit();
     }
 
     void OnApplicationQuit()
     {
         // Xử lý khi ứng dụng game đang thoát
-        saveVectorArrayMageParent.UpSave();
-        saveIntArrayIdMageParent.UpSave();
         HandleGameExit();
     }
 
     void HandleGameExit()
     {
-        Debug.Log("Thoát game"); // Thay thế bằng xử lý cụ thể của bạn khi người chơi thoát game
+        saveVectorArrayMageParent.UpSave();
+        saveIntArrayIdMageParent.UpSave();
+        // Debug.Log("Thoát game"); // Thay thế bằng xử lý cụ thể của bạn khi người chơi thoát game
         // Có thể thực hiện lưu trạng thái, gửi điểm số, và các tác vụ khác trước khi thoát
     }
 }

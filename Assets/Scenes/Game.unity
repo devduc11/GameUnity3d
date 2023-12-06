@@ -209,7 +209,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &125683035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,7 +498,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &341767887
 Transform:
   m_ObjectHideFlags: 0
@@ -525,6 +525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80f7f14d31d856a4dab0bb9ad0bae77a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ArrayPlayer: {fileID: 0}
 --- !u!4 &389583100 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8426421983000213037, guid: e5d16280a87843a4c8bcb4451a4f274e, type: 3}
@@ -616,7 +617,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &542156133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -660,7 +661,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &553014197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1627,6 +1628,8 @@ MonoBehaviour:
   level: 0
   levelData:
     levels: []
+  LoadDataMageId: 
+  textJSON: {fileID: 4900000, guid: 81bb9310db9e0a149a7d133afe3d363f, type: 3}
 --- !u!4 &1188348829
 Transform:
   m_ObjectHideFlags: 0
