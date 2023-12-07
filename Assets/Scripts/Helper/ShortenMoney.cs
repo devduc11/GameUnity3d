@@ -136,4 +136,5 @@ public static class ShortenMoney
 
         return text;
     }
+
 }

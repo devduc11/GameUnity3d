@@ -5,7 +5,6 @@ using UnityEngine.VFX;
 using DG.Tweening;
 using System.IO;
 using UnityEngine.Networking;
-
 [System.Serializable]
 public class Enemy1
 {
@@ -30,6 +29,9 @@ public class LevelData
 public class Game : MonoBehaviour
 {
     public static Game game;
+    public NewCharacter newCharacter;
+    public BtnMage btnMage;
+    public UiGame uiGame;
     public SaveVectorArrayMageParent saveVectorArrayMageParent;
     public SaveIntArrayIdMageParent saveIntArrayIdMageParent;
     public Transform BoxParent, zombieParent, PosZombie, BulletParent;
@@ -40,7 +42,13 @@ public class Game : MonoBehaviour
     public List<int> LoadDataMageId = new List<int>();
     public TextAsset textJSON;
     public double coin;
+    public bool hackCoin = false;
 
+    /* 
+    int intValue; // Khai báo biến kiểu Int32
+    long longValue; // Khai báo biến kiểu Int64 double
+    short shortValue; // Khai báo biến kiểu Int16
+     */
     private void Awake()
     {
         game = this;
@@ -49,9 +57,14 @@ public class Game : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        coin = 1000;
-        string result = ShortenMoney.ConvertCoin(coin);
-        Debug.Log(result);
+
+        if (hackCoin == true)
+        {
+            coin = 1000;
+            PlayerPrefs.SetString("Coin", $"{coin}");
+        }
+        // Debug.Log(largeDouble);
+        UpdateCoin();
         // UpLevel();
     }
 
@@ -116,26 +129,108 @@ public class Game : MonoBehaviour
         GameObject ob = Instantiate(MagePrefabs[MageLevelUp]);
         ob.transform.position = new Vector3(pos.x, ob.transform.position.y, pos.z);
         ob.transform.SetParent(GameObject.Find("MageParent").transform);
+        int Damage = ob.GetComponent<Player>().Damage;
+        checkNewCharacter(MageLevelUp, Damage);
     }
 
-    Vector3 pos;
     public void OnClinkBtnMage()
+    {
+        double price = btnMage.price;
+        if (coin >= price)
+        {
+            checkCoinBtnMage(price);
+            btnMage.checkPrice();
+            HashSet<Vector3> occupiedPositions = new HashSet<Vector3>();
+            Vector3 pos = Vector3.zero;
+            if (GameObject.Find("MageParent").transform.childCount < BoxParent.childCount)
+            {
+                GameObject ob = Instantiate(MagePrefabs[0]);
+
+                for (int i = 0; i < BoxParent.childCount; i++)
+                {
+                    Box box = BoxParent.GetChild(i).GetComponent<Box>();
+                    if (box.isCheckBox == false && !occupiedPositions.Contains(BoxParent.GetChild(i).transform.position))
+                    {
+                        pos = BoxParent.GetChild(i).transform.position;
+                        occupiedPositions.Add(pos); // Add the position to the HashSet
+                        break; // Break out of the loop once a valid position is found
+                    }
+                }
+
+                ob.transform.position = new Vector3(pos.x, ob.transform.position.y, pos.z);
+                ShowEffect(ob.transform, 1);
+                ob.transform.SetParent(GameObject.Find("MageParent").transform);
+            }
+        }
+        else
+        {
+            // btnMage.OnClinkAds(true);
+            print("ko du tien");
+            checkAdsBtnMage();
+        }
+    }
+
+    public void checkAdsBtnMage()// xem quảng cáo để thêmMage 
     {
         if (GameObject.Find("MageParent").transform.childCount < BoxParent.childCount)
         {
-            GameObject ob = Instantiate(MagePrefabs[0]);
-            for (int i = 0; i < BoxParent.childCount; i++)
+
+            List<Vector3> occupiedPositions = new List<Vector3>();
+            for (int j = 0; j < 2; j++)
             {
-                Box box = BoxParent.GetChild(i).GetComponent<Box>();
-                if (box.isCheckBox == false)
+                if (GameObject.Find("MageParent").transform.childCount < BoxParent.childCount)
                 {
-                    pos = BoxParent.GetChild(i).transform.position;
+                    GameObject ob = Instantiate(MagePrefabs[0]);
+                    Vector3 pos = FindUniquePosition(BoxParent, occupiedPositions);
+
+                    ob.transform.position = new Vector3(pos.x, ob.transform.position.y, pos.z);
+                    ShowEffect(ob.transform, 1);
+                    ob.transform.SetParent(GameObject.Find("MageParent").transform);
+
+                    occupiedPositions.Add(pos);
                 }
             }
-            ob.transform.position = new Vector3(pos.x, ob.transform.position.y, pos.z);
-            ShowEffect(ob.transform, 1);
-            ob.transform.SetParent(GameObject.Find("MageParent").transform);
+
+            // Function to find a unique position
+            Vector3 FindUniquePosition(Transform parent, List<Vector3> occupiedPositions)
+            {
+                Vector3 pos = Vector3.zero;
+
+                for (int i = 0; i < parent.childCount; i++)
+                {
+                    Box box = parent.GetChild(i).GetComponent<Box>();
+                    if (box.isCheckBox == false && !occupiedPositions.Contains(parent.GetChild(i).position))
+                    {
+                        pos = parent.GetChild(i).position;
+                        break;
+                    }
+                }
+                return pos;
+            }
         }
+    }
+
+    public void checkCoinBtnMage(double price)
+    {
+        double coinRemaining = coin - price;
+        PlayerPrefs.SetString("Coin", $"{coinRemaining}");
+        UpdateCoin();
+    }
+
+    public void UpdateCoin()
+    {
+        string textCon = PlayerPrefs.GetString("Coin");
+        if (!string.IsNullOrEmpty(textCon))
+        {
+            coin = double.Parse(textCon);
+        }
+        else
+        {
+
+
+        }
+
+        uiGame.UpdateCoin(coin);
     }
 
     public void ShowEffect(Transform transform, int index)
@@ -145,11 +240,12 @@ public class Game : MonoBehaviour
         Destroy(ob, 1);
     }
 
-    public void ShowBullet(Transform transform, int index)
+    public void ShowBullet(Transform transform, int index, int Damage)
     {
         GameObject ob = Instantiate(BulletPrefabs[index]);
         ob.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         ob.transform.SetParent(BulletParent);
+        ob.transform.GetComponent<Bullet>().Damage = Damage;
         Destroy(ob, 1);
     }
 
@@ -161,8 +257,28 @@ public class Game : MonoBehaviour
         ob.transform.SetParent(GameObject.Find("MageParent").transform);
     }
 
+    int idTemporary = -1;
+    public void checkNewCharacter(int id, int Damage)
+    {
+        if (id > idTemporary)
+        {
+            newCharacter.gameObject.SetActive(true);
+            newCharacter.check(id, Damage);
+            idTemporary = id;
+        }
+    }
+
     void Update()
     {
+        double price = btnMage.price;
+        if (coin >= price)
+        {
+            btnMage.OnClinkAds(false);
+        }
+        else
+        {
+            btnMage.OnClinkAds(true);
+        }
         // Kiểm tra sự kiện thoát game
         if (Input.GetKeyDown(KeyCode.Escape))
         {

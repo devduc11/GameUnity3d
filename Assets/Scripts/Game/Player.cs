@@ -12,10 +12,44 @@ public class Player : MonoBehaviour
     Player character;
     public int indexMage;
     public float StartPosY;
+    public int Damage;
     Plane plane = new Plane(Vector3.up, Vector3.zero);
 
     private void Awake()
     {
+        if (indexMage == 0)
+        {
+            Damage = 1;
+        }
+        else if (indexMage == 1)
+        {
+            Damage = 2;
+        }
+        else if (indexMage == 2)
+        {
+            Damage = 3;
+        }
+        else if (indexMage == 3)
+        {
+            Damage = 4;
+        }
+        else if (indexMage == 4)
+        {
+            Damage = 5;
+        }
+        else if (indexMage == 5)
+        {
+            Damage = 6;
+        }
+        else if (indexMage == 6)
+        {
+            Damage = 7;
+        }
+        else if (indexMage == 7)
+        {
+            Damage = 8;
+        }
+
     }
     // Start is called before the first frame update
     void Start()
@@ -154,7 +188,7 @@ public class Player : MonoBehaviour
 
     public void Shoot()
     {
-        Game.game.ShowBullet(ShootPoint, indexMage);
+        Game.game.ShowBullet(ShootPoint, indexMage, Damage);
     }
 
     public void AniIsIdle()

@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "GameTest3d.sln"
+    "dotnet.defaultSolution": "GameUnity3d.sln"
 }
