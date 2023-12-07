@@ -13,47 +13,18 @@ public class Player : MonoBehaviour
     public int indexMage;
     public float StartPosY;
     public int Damage;
+    public bool isPause;
     Plane plane = new Plane(Vector3.up, Vector3.zero);
 
     private void Awake()
     {
-        if (indexMage == 0)
-        {
-            Damage = 1;
-        }
-        else if (indexMage == 1)
-        {
-            Damage = 2;
-        }
-        else if (indexMage == 2)
-        {
-            Damage = 3;
-        }
-        else if (indexMage == 3)
-        {
-            Damage = 4;
-        }
-        else if (indexMage == 4)
-        {
-            Damage = 5;
-        }
-        else if (indexMage == 5)
-        {
-            Damage = 6;
-        }
-        else if (indexMage == 6)
-        {
-            Damage = 7;
-        }
-        else if (indexMage == 7)
-        {
-            Damage = 8;
-        }
+        Damage = StaticData.DamagePlayer[indexMage];
 
     }
     // Start is called before the first frame update
     void Start()
     {
+        isPause = true;
         animator = GetComponent<Animator>();
         BoxParent = GameObject.Find("BoxParent").transform;
         StartPosY = transform.position.y;
@@ -103,68 +74,77 @@ public class Player : MonoBehaviour
     Vector3 offsetPos;
     void OnMouseDown()
     {
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        float ent = 100f;
-        if (plane.Raycast(ray, out ent))
+        if (isPause)
         {
-            var hitPoint = ray.GetPoint(ent);
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            offsetPos = transform.position - hitPoint;
+            float ent = 100f;
+            if (plane.Raycast(ray, out ent))
+            {
+                var hitPoint = ray.GetPoint(ent);
+
+                offsetPos = transform.position - hitPoint;
+            }
         }
     }
 
     private void OnMouseDrag()
     {
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        float ent = 100f;
-        if (plane.Raycast(ray, out ent))
+        if (isPause)
         {
-            var hitPoint = ray.GetPoint(ent);
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            transform.position = hitPoint + offsetPos;
+            float ent = 100f;
+            if (plane.Raycast(ray, out ent))
+            {
+                var hitPoint = ray.GetPoint(ent);
+
+                transform.position = hitPoint + offsetPos;
+            }
+            /*   Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(transform.position).z);
+              Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+              transform.position = new Vector3(worldPosition.x, transform.position.y, worldPosition.z); */
+            if (box1 != null)
+            {
+                box1.checkSpriteRenderer(false);
+            }
+            // transform.SetParent(GameObject.Find("OnMouseMage").transform);
+            transform.tag = "OnMage";
+            AniIsIdle();
         }
-        /*   Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(transform.position).z);
-          Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-          transform.position = new Vector3(worldPosition.x, transform.position.y, worldPosition.z); */
-        if (box1 != null)
-        {
-            box1.checkSpriteRenderer(false);
-        }
-        // transform.SetParent(GameObject.Find("OnMouseMage").transform);
-        transform.tag = "OnMage";
-        AniIsIdle();
     }
 
     private void OnMouseUp()
     {
-        if (character != null)
+        if (isPause)
         {
-            character.box1.checkSpriteRenderer(false);
-            box1.checkSpriteRenderer(false);
-            if (indexMage == character.indexMage)
+            if (character != null)
             {
-                Game.game.UpdateMageLevelUp(character.transform.position, indexMage);
-                Game.game.ShowEffect(character.transform, 0);
-                Destroy(character.gameObject);
-                Destroy(gameObject);
+                character.box1.checkSpriteRenderer(false);
+                box1.checkSpriteRenderer(false);
+                if (indexMage == character.indexMage)
+                {
+                    Game.game.UpdateMageLevelUp(character.transform.position, indexMage);
+                    Game.game.ShowEffect(character.transform, 0);
+                    Destroy(character.gameObject);
+                    Destroy(gameObject);
+                }
+                else if (indexMage != character.indexMage)
+                {
+                    transform.tag = "Character";
+                    transform.position = new Vector3(boxPos.x, StartPosY, boxPos.z);
+                    // transform.SetParent(GameObject.Find("MageParent").transform);
+                    character = null;
+                }
             }
-            else if (indexMage != character.indexMage)
+            else if (character == null)
             {
                 transform.tag = "Character";
                 transform.position = new Vector3(boxPos.x, StartPosY, boxPos.z);
                 // transform.SetParent(GameObject.Find("MageParent").transform);
-                character = null;
             }
+            AniIsAttack();
         }
-        else if (character == null)
-        {
-            transform.tag = "Character";
-            transform.position = new Vector3(boxPos.x, StartPosY, boxPos.z);
-            // transform.SetParent(GameObject.Find("MageParent").transform);
-        }
-        AniIsAttack();
     }
 
     private void OnTriggerEnter(Collider other)

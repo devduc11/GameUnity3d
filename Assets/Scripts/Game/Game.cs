@@ -34,6 +34,7 @@ public class Game : MonoBehaviour
     public UiGame uiGame;
     public SaveVectorArrayMageParent saveVectorArrayMageParent;
     public SaveIntArrayIdMageParent saveIntArrayIdMageParent;
+    public SaveIntArrayIdCharacterInfo saveIntArrayIdCharacterInfo;
     public Transform BoxParent, zombieParent, PosZombie, BulletParent;
     public GameObject[] MagePrefabs, zombiePrefab, effectPrefabs, BulletPrefabs;
     public int MageLevelUp;
@@ -43,6 +44,8 @@ public class Game : MonoBehaviour
     public TextAsset textJSON;
     public double coin;
     public bool hackCoin = false;
+    public List<int> ItemInfoInt = new List<int>();
+    public int idTemporary;
 
     /* 
     int intValue; // Khai báo biến kiểu Int32
@@ -58,9 +61,21 @@ public class Game : MonoBehaviour
     void Start()
     {
 
+        int idTemp = PlayerPrefs.GetInt("IdTemporary");
+        if (idTemp == 0)
+        {
+            idTemporary = 0;
+            hackCoin = true;
+        }
+        else if (idTemp > 0)
+        {
+            idTemporary = idTemp;
+            hackCoin = false;
+        }
+
         if (hackCoin == true)
         {
-            coin = 1000;
+            coin = 300;
             PlayerPrefs.SetString("Coin", $"{coin}");
         }
         // Debug.Log(largeDouble);
@@ -124,13 +139,26 @@ public class Game : MonoBehaviour
         }
         else if (indexMage == 7)
         {
-            MageLevelUp = 7;
+            MageLevelUp = 8;
         }
-        GameObject ob = Instantiate(MagePrefabs[MageLevelUp]);
-        ob.transform.position = new Vector3(pos.x, ob.transform.position.y, pos.z);
-        ob.transform.SetParent(GameObject.Find("MageParent").transform);
-        int Damage = ob.GetComponent<Player>().Damage;
-        checkNewCharacter(MageLevelUp, Damage);
+        else if (indexMage == 8)
+        {
+            MageLevelUp = 9;
+        }
+        else if (indexMage == 9)
+        {
+            MageLevelUp = 10;
+        }
+
+        if (MageLevelUp < 10)
+        {
+            GameObject ob = Instantiate(MagePrefabs[MageLevelUp]);
+            ob.transform.position = new Vector3(pos.x, ob.transform.position.y, pos.z);
+            ob.transform.SetParent(GameObject.Find("MageParent").transform);
+            int Damage = ob.GetComponent<Player>().Damage;
+            checkNewCharacter(MageLevelUp, Damage);
+        }
+
     }
 
     public void OnClinkBtnMage()
@@ -138,12 +166,12 @@ public class Game : MonoBehaviour
         double price = btnMage.price;
         if (coin >= price)
         {
-            checkCoinBtnMage(price);
-            btnMage.checkPrice();
-            HashSet<Vector3> occupiedPositions = new HashSet<Vector3>();
             Vector3 pos = Vector3.zero;
             if (GameObject.Find("MageParent").transform.childCount < BoxParent.childCount)
             {
+                checkCoinBtnMage(price);
+                btnMage.checkPrice();
+                HashSet<Vector3> occupiedPositions = new HashSet<Vector3>();
                 GameObject ob = Instantiate(MagePrefabs[0]);
 
                 for (int i = 0; i < BoxParent.childCount; i++)
@@ -227,7 +255,6 @@ public class Game : MonoBehaviour
         else
         {
 
-
         }
 
         uiGame.UpdateCoin(coin);
@@ -257,7 +284,6 @@ public class Game : MonoBehaviour
         ob.transform.SetParent(GameObject.Find("MageParent").transform);
     }
 
-    int idTemporary = -1;
     public void checkNewCharacter(int id, int Damage)
     {
         if (id > idTemporary)
@@ -265,6 +291,36 @@ public class Game : MonoBehaviour
             newCharacter.gameObject.SetActive(true);
             newCharacter.check(id, Damage);
             idTemporary = id;
+            PlayerPrefs.SetInt("IdTemporary", idTemporary);
+            ItemInfoInt.Add(id);
+            saveIntArrayIdCharacterInfo.SaveIntegers();
+            DOVirtual.DelayedCall(1f, () =>
+            {
+                CheckPause(false);
+            });
+        }
+    }
+
+    public void CheckPause(bool bl)
+    {
+        for (int i = 0; i < GameObject.Find("MageParent").transform.childCount; i++)
+        {
+            Player player = GameObject.Find("MageParent").transform.GetChild(i).transform.GetComponent<Player>();
+            if (bl == false)
+            {
+                player.AniIsIdle();
+                player.isPause = false;
+            }
+            else if (bl == true)
+            {
+                player.AniIsAttack();
+                player.isPause = true;
+            }
+        }
+
+        for (int i = 0; i < BulletParent.childCount; i++)
+        {
+            Destroy(BulletParent.GetChild(i).gameObject);
         }
     }
 

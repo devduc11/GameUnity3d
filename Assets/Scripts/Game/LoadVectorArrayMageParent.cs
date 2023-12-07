@@ -23,7 +23,7 @@ public class LoadVectorArrayMageParent : MonoBehaviour
         // string newFolderPath = "Assets/Scripts/Data/";
         // string newFilePath = Path.Combine(newFolderPath, "VectorArrayDataMageParent.json");
         // filePath = newFilePath;
-        // LoadPositions();
+        LoadPositions();
     }
 
     private void LoadPositions()
@@ -38,7 +38,8 @@ public class LoadVectorArrayMageParent : MonoBehaviour
             Vector3ArrayWrapper loadedWrapper = JsonUtility.FromJson<Vector3ArrayWrapper>(json);
 
             // Kiểm tra xem dữ liệu đã được tải thành công không
-            if (loadedWrapper != null)
+            int idTemp = PlayerPrefs.GetInt("IdTemporary");
+            if (loadedWrapper != null && idTemp != 0)
             {
                 // Lặp qua mảng Vector3 và in ra vị trí
                 for (int i = 0; i < loadedWrapper.vectorArray.Length; i++)
@@ -51,7 +52,7 @@ public class LoadVectorArrayMageParent : MonoBehaviour
             }
             else
             {
-                Debug.Log("Dữ liệu không hợp lệ.");
+                // Debug.Log("Dữ liệu không hợp lệ.");
             }
         }
         else

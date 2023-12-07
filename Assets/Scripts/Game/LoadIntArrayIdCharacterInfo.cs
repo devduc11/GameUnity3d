@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class LoadIntArrayIdMageParent : MonoBehaviour
+public class LoadIntArrayIdCharacterInfo : MonoBehaviour
 {
     [System.Serializable]
     public class IntArrayWrapper
@@ -12,18 +12,10 @@ public class LoadIntArrayIdMageParent : MonoBehaviour
     }
     // Đường dẫn của tệp JSON
     private string filePath;
-    public Transform ArrayPlayer;
-
+    // Start is called before the first frame update
     void Start()
     {
-        ArrayPlayer = GameObject.Find("MageParent").transform;
-        // string newFolderPath = "Assets/Scripts/Data/";
-        // string newFilePath = Path.Combine(newFolderPath, "IntArrayDataIdMageParent.json");
-        // Thiết lập đường dẫn tới tệp JSON
-        filePath = Path.Combine(Application.persistentDataPath, "IntArrayDataIdMageParent.json");
-        // filePath = newFilePath;
-
-        // Gọi hàm để tải dữ liệu
+        filePath = Path.Combine(Application.persistentDataPath, "IntArrayDataIdCharacterInfo.json");
         LoadIntegers();
     }
 
@@ -45,12 +37,13 @@ public class LoadIntArrayIdMageParent : MonoBehaviour
                 // Lặp qua mảng int và in ra giá trị
                 for (int i = 0; i < loadedWrapper.intArray.Length; i++)
                 {
-                    Game.game.LoadDataMageId.Add(loadedWrapper.intArray[i]);
+                    Game.game.ItemInfoInt.Add(loadedWrapper.intArray[i]);
                     // Debug.Log("Giá trị " + i + ": " + loadedWrapper.intArray[i]);
                 }
             }
             else
             {
+                Game.game.ItemInfoInt.Add(0);
                 // Debug.Log("Dữ liệu không hợp lệ.");
             }
         }

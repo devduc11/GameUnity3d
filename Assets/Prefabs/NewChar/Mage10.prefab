@@ -636,6 +636,7 @@ GameObject:
   - component: {fileID: 8370769845711761050}
   - component: {fileID: 8370769845711761049}
   - component: {fileID: 8370769845711761048}
+  - component: {fileID: -3228182378181826177}
   m_Layer: 0
   m_Name: Mage10
   m_TagString: Character
@@ -725,6 +726,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!114 &-3228182378181826177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4545753079374300904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db0a93a7edcf7944aaa99df81fe02e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  BoxParent: {fileID: 0}
+  ShootPoint: {fileID: 8370769846199357449}
+  nearbyBox: []
+  boxPos: {x: 0, y: 0, z: 0}
+  box1: {fileID: 0}
+  indexMage: 9
+  StartPosY: 0
+  Damage: 0
 --- !u!1 &4920892990600641158
 GameObject:
   m_ObjectHideFlags: 0
