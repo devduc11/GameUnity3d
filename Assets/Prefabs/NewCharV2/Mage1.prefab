@@ -845,6 +845,7 @@ MonoBehaviour:
   indexMage: 0
   StartPosY: 0
   Damage: 0
+  isPause: 0
 --- !u!1 &6449722794970299082
 GameObject:
   m_ObjectHideFlags: 0
@@ -1204,7 +1205,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7543994673518351142}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.167, z: 0.555}
+  m_LocalPosition: {x: 0, y: 0.405, z: 0.555}
   m_LocalScale: {x: 44.314453, y: 44.314453, z: 44.314453}
   m_Children: []
   m_Father: {fileID: 6449722794970588904}

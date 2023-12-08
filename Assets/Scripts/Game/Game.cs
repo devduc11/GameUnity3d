@@ -35,6 +35,7 @@ public class Game : MonoBehaviour
     public SaveVectorArrayMageParent saveVectorArrayMageParent;
     public SaveIntArrayIdMageParent saveIntArrayIdMageParent;
     public SaveIntArrayIdCharacterInfo saveIntArrayIdCharacterInfo;
+    public Tutorial tutorial;
     public Transform BoxParent, zombieParent, PosZombie, BulletParent;
     public GameObject[] MagePrefabs, zombiePrefab, effectPrefabs, BulletPrefabs;
     public int MageLevelUp;
@@ -66,10 +67,12 @@ public class Game : MonoBehaviour
         if (idTemp == 0)
         {
             idTemporary = 0;
+            tutorial.check(true);
         }
         else if (idTemp > 0)
         {
             idTemporary = idTemp;
+            tutorial.check(false);
         }
 
         UpdateCoin();
@@ -286,6 +289,7 @@ public class Game : MonoBehaviour
 
     public void checkNewCharacter(int id, int Damage)
     {
+        // print();
         if (id > idTemporary)
         {
             newCharacter.gameObject.SetActive(true);
@@ -298,6 +302,8 @@ public class Game : MonoBehaviour
             {
                 CheckPause(false);
             });
+            tutorial.isPause = false;
+            tutorial.hand2.gameObject.SetActive(false);
         }
     }
 
