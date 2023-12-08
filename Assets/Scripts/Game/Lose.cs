@@ -5,21 +5,28 @@ using UnityEngine.UI;
 
 public class Lose : MonoBehaviour
 {
-
+    public static Lose lose;
     public Transform Arrow, ButtonContinue;
     public Text TextCoin, TextCoinReward;
     public double reward, coin, rewardsReceived;
     public bool startRotate = false;
+    public bool isPauseOnClickClaim;
+
+    private void Awake()
+    {
+        lose = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
-        startRotate = true;
-        coin = 10;
         check();
     }
 
     public void check()
     {
+        startRotate = true;
+        isPauseOnClickClaim = true;
+        coin = 10;
         string result = ShortenMoney.ConvertCoin(coin);
         TextCoin.text = result;
         Invoke("CheckShowButtonContinue", 2);
@@ -38,7 +45,16 @@ public class Lose : MonoBehaviour
 
     public void OnClickClaim()
     {
-        startRotate = false;
+        if (isPauseOnClickClaim)
+        {
+            startRotate = false;
+            GoogleAds.googleAds.CheckShowAdmobRewardEd(2);
+            isPauseOnClickClaim = false;
+        }
+    }
+
+    public void checkRewards()// gọi qua GoogleAds để trả thưởng
+    {
         print(rewardsReceived);
         // PlayerPrefs.SetString("Coin", $"{rewardsReceived}");
     }

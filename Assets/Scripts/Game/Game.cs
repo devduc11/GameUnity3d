@@ -56,7 +56,7 @@ public class Game : MonoBehaviour
     private void Awake()
     {
         game = this;
-        InvokeRepeating("HandleGameExit", 0, 1);
+        // InvokeRepeating("HandleGameExit", 0, 1);
     }
 
     // Start is called before the first frame update
@@ -79,6 +79,7 @@ public class Game : MonoBehaviour
         if (hackCoin == true)
         {
             coin = 350;
+            // coin = 0;
             PlayerPrefs.SetString("Coin", $"{coin}");
             uiGame.UpdateCoin(coin);
         }
@@ -196,7 +197,8 @@ public class Game : MonoBehaviour
         {
             // btnMage.OnClinkAds(true);
             print("ko du tien");
-            checkAdsBtnMage();
+            // checkAdsBtnMage();
+            GoogleAds.googleAds.CheckShowAdmobRewardEd(0);
         }
     }
 

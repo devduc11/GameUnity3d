@@ -5,20 +5,29 @@ using UnityEngine.UI;
 
 public class Victory : MonoBehaviour
 {
+    public static Victory victory;
     public Transform Arrow, ButtonContinue;
     public Text TextCoin, TextCoinReward;
     public double reward, coin, rewardsReceived;
     public bool startRotate = false;
+    public bool isPauseOnClickClaim;
+
+    private void Awake()
+    {
+        victory = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        startRotate = true;
-        coin = 10;
         check();
     }
 
     public void check()
     {
+        startRotate = true;
+        isPauseOnClickClaim = true;
+        coin = 10;
         string result = ShortenMoney.ConvertCoin(coin);
         TextCoin.text = result;
         Invoke("CheckShowButtonContinue", 2);
@@ -37,7 +46,16 @@ public class Victory : MonoBehaviour
 
     public void OnClickClaim()
     {
-        startRotate = false;
+        if (isPauseOnClickClaim)
+        {
+            startRotate = false;
+            GoogleAds.googleAds.CheckShowAdmobRewardEd(1);
+            isPauseOnClickClaim = false;
+        }
+    }
+
+    public void checkRewards()// gọi qua GoogleAds để trả thưởng
+    {
         print(rewardsReceived);
         // PlayerPrefs.SetString("Coin", $"{rewardsReceived}");
     }
