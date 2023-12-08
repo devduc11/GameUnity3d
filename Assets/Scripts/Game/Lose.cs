@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Victory : MonoBehaviour
+public class Lose : MonoBehaviour
 {
+
     public Transform Arrow, ButtonContinue;
     public Text TextCoin, TextCoinReward;
     public double reward, coin, rewardsReceived;

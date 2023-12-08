@@ -8,6 +8,9 @@ TagManager:
   - Character
   - OnMage
   - Zombie
+  - GameScreen
+  - FxTemporaire
+  - Circle
   layers:
   - Default
   - TransparentFX
