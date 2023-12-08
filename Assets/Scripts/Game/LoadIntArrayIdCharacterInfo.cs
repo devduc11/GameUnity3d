@@ -50,6 +50,7 @@ public class LoadIntArrayIdCharacterInfo : MonoBehaviour
         else
         {
             Debug.Log("Tệp không tồn tại: " + filePath);
+            Game.game.ItemInfoInt.Add(0);
         }
     }
 }

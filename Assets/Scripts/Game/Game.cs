@@ -55,6 +55,7 @@ public class Game : MonoBehaviour
     private void Awake()
     {
         game = this;
+        InvokeRepeating("HandleGameExit", 0, 1);
     }
 
     // Start is called before the first frame update
@@ -65,21 +66,19 @@ public class Game : MonoBehaviour
         if (idTemp == 0)
         {
             idTemporary = 0;
-            hackCoin = true;
         }
         else if (idTemp > 0)
         {
             idTemporary = idTemp;
-            hackCoin = false;
         }
 
+        UpdateCoin();
         if (hackCoin == true)
         {
-            coin = 300;
+            coin = 350;
             PlayerPrefs.SetString("Coin", $"{coin}");
+            uiGame.UpdateCoin(coin);
         }
-        // Debug.Log(largeDouble);
-        UpdateCoin();
         // UpLevel();
     }
 
@@ -251,10 +250,11 @@ public class Game : MonoBehaviour
         if (!string.IsNullOrEmpty(textCon))
         {
             coin = double.Parse(textCon);
+            hackCoin = false;
         }
         else
         {
-
+            hackCoin = true;
         }
 
         uiGame.UpdateCoin(coin);
@@ -339,7 +339,7 @@ public class Game : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
         }
-        HandleGameExit();
+        // HandleGameExit();
     }
 
     void OnApplicationQuit()

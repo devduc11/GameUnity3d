@@ -24,7 +24,8 @@ public class LoadIntArrayIdMageParent : MonoBehaviour
         // filePath = newFilePath;
 
         // Gọi hàm để tải dữ liệu
-        LoadIntegers();
+        // LoadIntegers();
+        Invoke("LoadIntegers", 0.1f);
     }
 
     private void LoadIntegers()
@@ -40,7 +41,7 @@ public class LoadIntArrayIdMageParent : MonoBehaviour
 
             // Kiểm tra xem dữ liệu đã được tải thành công không
             int idTemp = PlayerPrefs.GetInt("IdTemporary");
-            if (loadedWrapper != null && idTemp != 0)
+            if (loadedWrapper != null && Game.game.hackCoin != true)
             {
                 // Lặp qua mảng int và in ra giá trị
                 for (int i = 0; i < loadedWrapper.intArray.Length; i++)

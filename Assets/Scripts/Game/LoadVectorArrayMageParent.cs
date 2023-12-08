@@ -23,7 +23,8 @@ public class LoadVectorArrayMageParent : MonoBehaviour
         // string newFolderPath = "Assets/Scripts/Data/";
         // string newFilePath = Path.Combine(newFolderPath, "VectorArrayDataMageParent.json");
         // filePath = newFilePath;
-        LoadPositions();
+        // LoadPositions();
+        Invoke("LoadPositions", 0.1f);
     }
 
     private void LoadPositions()
@@ -39,7 +40,7 @@ public class LoadVectorArrayMageParent : MonoBehaviour
 
             // Kiểm tra xem dữ liệu đã được tải thành công không
             int idTemp = PlayerPrefs.GetInt("IdTemporary");
-            if (loadedWrapper != null && idTemp != 0)
+            if (loadedWrapper != null && Game.game.hackCoin != true)
             {
                 // Lặp qua mảng Vector3 và in ra vị trí
                 for (int i = 0; i < loadedWrapper.vectorArray.Length; i++)
