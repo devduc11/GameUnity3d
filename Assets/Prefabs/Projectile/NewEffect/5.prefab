@@ -4692,7 +4692,7 @@ GameObject:
   - component: {fileID: 6982367330724177185}
   m_Layer: 0
   m_Name: 5
-  m_TagString: FxTemporaire
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9494,6 +9494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
+  Damage: 0
 --- !u!1 &6570765030859299426
 GameObject:
   m_ObjectHideFlags: 0

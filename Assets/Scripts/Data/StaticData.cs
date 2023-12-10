@@ -27,5 +27,7 @@ public class StaticData : MonoBehaviour
         return action.ToString();
     }
     public static int[] DamagePlayer = new int[] { 4, 10, 23, 54, 128, 304, 720, 1706, 4042, 9577, 22691 };
-    
+    public static int[] HpZombie = new int[] { 20, 47, 112, 264, 622, 1474, 3493, 8278, 19618, 46492, 110181 };
+    public static int[] CoinZombie = new int[] { 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100 };
+
 }

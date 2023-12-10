@@ -1069,7 +1069,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  Boder: {fileID: 2475992160384807681}
+  effect: {fileID: 1823152176593548990}
   speed: 2
+  minHp: 0
+  maxHp: 0
+  isStop: 0
 --- !u!1 &4188121703471871990
 GameObject:
   m_ObjectHideFlags: 0
@@ -2338,7 +2343,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2129692497138547353, guid: 9347b8e22affa24498a5156d2afc6b54, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9347b8e22affa24498a5156d2afc6b54, type: 3}
@@ -2360,7 +2365,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2508226014934948750, guid: dd99e90a7c623a14db97793f0769ea3b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4253135877665064117, guid: dd99e90a7c623a14db97793f0769ea3b, type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
@@ -2436,6 +2441,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd99e90a7c623a14db97793f0769ea3b, type: 3}
+--- !u!1 &1823152176593548990 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2508226014934948750, guid: dd99e90a7c623a14db97793f0769ea3b, type: 3}
+  m_PrefabInstance: {fileID: 4288026610558430512}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8761155030235976329 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4762487815241367481, guid: dd99e90a7c623a14db97793f0769ea3b, type: 3}

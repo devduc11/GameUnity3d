@@ -123,7 +123,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  Boder: {fileID: 4852070823373538826}
+  effect: {fileID: 6523560883642030866}
   speed: 2
+  minHp: 0
+  maxHp: 0
+  isStop: 0
 --- !u!1 &535090599252628884
 GameObject:
   m_ObjectHideFlags: 0
@@ -10464,7 +10469,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2129692497138547353, guid: 9347b8e22affa24498a5156d2afc6b54, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9347b8e22affa24498a5156d2afc6b54, type: 3}

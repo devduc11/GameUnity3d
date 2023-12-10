@@ -38,5 +38,6 @@ public class NewCharacter : MonoBehaviour
     {
         gameObject.SetActive(false);
         Game.game.CheckPause(true);
+        Game.game.OffNewCharacter();
     }
 }

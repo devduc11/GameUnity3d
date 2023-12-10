@@ -11,6 +11,8 @@ TagManager:
   - GameScreen
   - FxTemporaire
   - Circle
+  - Bullet
+  - CheckOver
   layers:
   - Default
   - TransparentFX

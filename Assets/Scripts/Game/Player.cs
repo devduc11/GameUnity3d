@@ -5,30 +5,32 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Animator animator;
-    public Transform BoxParent, ShootPoint;
+    public Transform BoxParent, ShootPoint, PosZombie;
     public List<GameObject> nearbyBox = new List<GameObject>();
     public Vector3 boxPos;
     public Box box1;
     Player character;
     public int indexMage;
     public float StartPosY;
-    public int Damage;
-    public bool isPause;
+    public int Damage, idBox;
+    public bool isPause, isMove;
+    public bool isVictoryTriggered = false;
     Plane plane = new Plane(Vector3.up, Vector3.zero);
 
     private void Awake()
     {
         Damage = StaticData.DamagePlayer[indexMage];
-
+        PosZombie = GameObject.Find("PosZombie").transform;
     }
     // Start is called before the first frame update
     void Start()
     {
+        isMove = true;
         isPause = true;
         animator = GetComponent<Animator>();
         BoxParent = GameObject.Find("BoxParent").transform;
         StartPosY = transform.position.y;
-        Invoke("AniIsAttack", 0.5f);
+        // Invoke("AniIsAttack", 0.5f);
     }
 
     // Update is called once per frame
@@ -66,8 +68,26 @@ public class Player : MonoBehaviour
                     box.checkSpriteRenderer(true);
                     boxPos = box.transform.position;
                     box1 = box;
+                    idBox = box.idBox;
                 }
             }
+        }
+
+        if (isMove)
+        {
+            if (PosZombie.GetChild(idBox).childCount > 0)
+            {
+                AniIsAttack();
+            }
+            else
+            {
+                AniIsIdle();
+            }
+        }
+
+        if (isVictoryTriggered)
+        {
+            animator.SetTrigger("Victory");
         }
     }
 
@@ -111,6 +131,7 @@ public class Player : MonoBehaviour
             // transform.SetParent(GameObject.Find("OnMouseMage").transform);
             transform.tag = "OnMage";
             AniIsIdle();
+            isMove = false;
         }
     }
 
@@ -144,6 +165,7 @@ public class Player : MonoBehaviour
                 // transform.SetParent(GameObject.Find("MageParent").transform);
             }
             AniIsAttack();
+            isMove = true;
         }
     }
 
@@ -153,6 +175,7 @@ public class Player : MonoBehaviour
         {
             character = other.gameObject.GetComponent<Player>();
             character.AniIsIdle();
+            character.isMove = false;
         }
     }
 
@@ -162,6 +185,7 @@ public class Player : MonoBehaviour
         {
             character = other.gameObject.GetComponent<Player>();
             character.AniIsAttack();
+            character.isMove = true;
             character = null;
         }
     }
@@ -183,4 +207,10 @@ public class Player : MonoBehaviour
         animator.SetBool("IsAttack", true);
         animator.speed = 1;
     }
+
+    public void AniVictory(bool bl)
+    {
+    }
+
+
 }

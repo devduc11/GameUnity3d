@@ -39,8 +39,7 @@ public class LoadVectorArrayMageParent : MonoBehaviour
             Vector3ArrayWrapper loadedWrapper = JsonUtility.FromJson<Vector3ArrayWrapper>(json);
 
             // Kiểm tra xem dữ liệu đã được tải thành công không
-            int idTemp = PlayerPrefs.GetInt("IdTemporary");
-            if (loadedWrapper != null && Game.game.hackCoin != true)
+            if (loadedWrapper != null && BtnMage.btnMage.price != BtnMage.btnMage.initialAmount)
             {
                 // Lặp qua mảng Vector3 và in ra vị trí
                 for (int i = 0; i < loadedWrapper.vectorArray.Length; i++)

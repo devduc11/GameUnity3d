@@ -6,6 +6,7 @@ public class Box : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
     public bool isCheckBox;
+    public int idBox;
     // Start is called before the first frame update
     void Start()
     {

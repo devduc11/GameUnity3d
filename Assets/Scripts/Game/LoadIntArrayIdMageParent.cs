@@ -40,8 +40,7 @@ public class LoadIntArrayIdMageParent : MonoBehaviour
             IntArrayWrapper loadedWrapper = JsonUtility.FromJson<IntArrayWrapper>(json);
 
             // Kiểm tra xem dữ liệu đã được tải thành công không
-            int idTemp = PlayerPrefs.GetInt("IdTemporary");
-            if (loadedWrapper != null && Game.game.hackCoin != true)
+            if (loadedWrapper != null && BtnMage.btnMage.price != BtnMage.btnMage.initialAmount)
             {
                 // Lặp qua mảng int và in ra giá trị
                 for (int i = 0; i < loadedWrapper.intArray.Length; i++)

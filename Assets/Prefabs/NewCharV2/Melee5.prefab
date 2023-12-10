@@ -473,7 +473,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  Boder: {fileID: 8649853956337672646}
+  effect: {fileID: 4835505520454304208}
   speed: 2
+  minHp: 0
+  maxHp: 0
+  isStop: 0
 --- !u!1 &7877315344875972281
 GameObject:
   m_ObjectHideFlags: 0
@@ -2017,6 +2022,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd99e90a7c623a14db97793f0769ea3b, type: 3}
+--- !u!1 &4835505520454304208 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2508226014934948750, guid: dd99e90a7c623a14db97793f0769ea3b, type: 3}
+  m_PrefabInstance: {fileID: 7049304275461724766}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2577160202212058599 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4762487815241367481, guid: dd99e90a7c623a14db97793f0769ea3b, type: 3}
@@ -2091,7 +2101,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2129692497138547353, guid: 9347b8e22affa24498a5156d2afc6b54, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9347b8e22affa24498a5156d2afc6b54, type: 3}

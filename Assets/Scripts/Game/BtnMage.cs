@@ -6,12 +6,14 @@ using UnityEngine.UI;
 
 public class BtnMage : MonoBehaviour
 {
+    public static BtnMage btnMage;
     public Transform ImgAds;
     public Text TextPrice;
-    public double price;
-    // Start is called before the first frame update
-    void Start()
+    public double price, initialAmount;
+
+    private void Awake()
     {
+        btnMage = this;
         string textPrice = PlayerPrefs.GetString("Price");
 
         if (!string.IsNullOrEmpty(textPrice))
@@ -21,8 +23,13 @@ public class BtnMage : MonoBehaviour
         }
         else
         {
-            price = 150;
+            price = initialAmount;
         }
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
         UpText();
 
     }

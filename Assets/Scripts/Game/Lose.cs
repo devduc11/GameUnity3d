@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Lose : MonoBehaviour
 {
     public static Lose lose;
-    public Transform Arrow, ButtonContinue;
+    public Transform Arrow, ButtonContinue, CoinEffect;
     public Text TextCoin, TextCoinReward;
     public double reward, coin, rewardsReceived;
     public bool startRotate = false;
@@ -19,14 +21,14 @@ public class Lose : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        check();
     }
 
-    public void check()
+    public void check(double coin)
     {
+        ButtonContinue.localScale = Vector3.zero;
         startRotate = true;
         isPauseOnClickClaim = true;
-        coin = 10;
+        this.coin = coin;
         string result = ShortenMoney.ConvertCoin(coin);
         TextCoin.text = result;
         Invoke("CheckShowButtonContinue", 2);
@@ -34,12 +36,21 @@ public class Lose : MonoBehaviour
 
     public void CheckShowButtonContinue()
     {
-        LibraryMy.EffectScaleObjectOn(ButtonContinue, 0.3f, 1f);
+        LibraryMy.EffectScaleObjectOn(ButtonContinue, 0.3f, 1f, () => CancelCheckShowButtonContinue());
     }
+
+    public void CancelCheckShowButtonContinue()
+    {
+        CancelInvoke("CheckShowButtonContinue");
+    }
+
 
     public void OnButtonContinue()
     {
-        print(coin);
+        // print(coin);
+        // ButtonContinue.localScale = Vector3.zero;
+        // gameObject.SetActive(false);
+        SceneManager.LoadScene("Game");
         // PlayerPrefs.SetString("Coin", $"{coin}");
     }
 
@@ -56,7 +67,13 @@ public class Lose : MonoBehaviour
     public void checkRewards()// gọi qua GoogleAds để trả thưởng
     {
         print(rewardsReceived);
-        // PlayerPrefs.SetString("Coin", $"{rewardsReceived}");
+        CoinEffect.gameObject.SetActive(true);
+        PlayerPrefs.SetString("Coin", $"{rewardsReceived}");
+        Game.game.UpdateCoin();
+        DOVirtual.DelayedCall(1.5f, () =>
+        {
+            SceneManager.LoadScene("Game");
+        });
     }
 
     // Update is called once per frame
