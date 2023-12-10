@@ -43,7 +43,7 @@ public class Game : MonoBehaviour
     public List<int> LoadDataMageId = new List<int>();
     public TextAsset textJSON;
     public double coin;
-    public bool hackCoin = false, isCheckNext, isTutorial;
+    public bool hackCoin = false, isCheckNext, isTutorial, isVictory, isLose;
     public List<int> ItemInfoInt = new List<int>();
     public int idTemporary, SumZombie, indexZombie;
     public Tween delayedCallTween;
@@ -62,7 +62,8 @@ public class Game : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        isVictory = true;
+        isLose = true;
         int idTemp = PlayerPrefs.GetInt("IdTemporary");
         if (idTemp == 0)
         {
@@ -303,8 +304,9 @@ public class Game : MonoBehaviour
         PlayerPrefs.SetString("Coin", $"{coinRemaining}");
         UpdateCoin();
         indexZombie += 1;
-        if (indexZombie >= SumZombie)
+        if (indexZombie >= SumZombie && isVictory == true)
         {
+            // isLose = false;
             UIHome.gameObject.SetActive(false);
             fxConfetti.gameObject.SetActive(true);
             DOVirtual.DelayedCall(1.5f, () =>
@@ -329,12 +331,16 @@ public class Game : MonoBehaviour
 
     public void CheckOver()
     {
-        UIHome.gameObject.SetActive(false);
-        GoogleAds.googleAds.ShowAdmobInterstitialAd();
-        DOVirtual.DelayedCall(1f, () =>
+        isVictory = false;
+        if (isLose == true)
         {
-            uiGame.Lose(coin);
-        });
+            UIHome.gameObject.SetActive(false);
+            GoogleAds.googleAds.ShowAdmobInterstitialAd();
+            DOVirtual.DelayedCall(1f, () =>
+            {
+                uiGame.Lose(coin);
+            });
+        }
     }
 
     public void ShowEffect(Transform transform, int index)
