@@ -29,11 +29,9 @@ public class Game : MonoBehaviour
 {
     public static Game game;
     public NewCharacter newCharacter;
+    public SaveIntArrayIdCharacterInfo saveIntArrayIdCharacterInfo;
     public BtnMage btnMage;
     public UiGame uiGame;
-    public SaveVectorArrayMageParent saveVectorArrayMageParent;
-    public SaveIntArrayIdMageParent saveIntArrayIdMageParent;
-    public SaveIntArrayIdCharacterInfo saveIntArrayIdCharacterInfo;
     public Tutorial tutorial;
     public Transform BoxParent, zombieParent, PosZombie, BulletParent, UIHome, fxConfetti;
     public GameObject[] MagePrefabs, zombiePrefab, effectPrefabs, BulletPrefabs;
@@ -56,7 +54,6 @@ public class Game : MonoBehaviour
     private void Awake()
     {
         game = this;
-        InvokeRepeating("HandleGameExit", 0, 1);
     }
 
     // Start is called before the first frame update
@@ -471,24 +468,12 @@ public class Game : MonoBehaviour
             btnMage.OnClinkAds(true);
         }
 
-        // Kiểm tra sự kiện thoát game
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-        }
-        // HandleGameExit();
     }
 
     void OnApplicationQuit()
     {
         // Xử lý khi ứng dụng game đang thoát
-        HandleGameExit();
+        // HandleGameExit();
     }
 
-    void HandleGameExit()
-    {
-        saveVectorArrayMageParent.UpSave();
-        saveIntArrayIdMageParent.UpSave();
-        // Debug.Log("Thoát game"); // Thay thế bằng xử lý cụ thể của bạn khi người chơi thoát game
-        // Có thể thực hiện lưu trạng thái, gửi điểm số, và các tác vụ khác trước khi thoát
-    }
 }

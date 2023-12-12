@@ -1515,7 +1515,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &125683035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2466,6 +2466,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 219522187}
   m_CullTransparentMesh: 1
+--- !u!1 &225726653
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 225726654}
+  - component: {fileID: 225726655}
+  m_Layer: 0
+  m_Name: DataMageParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &225726654
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225726653}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1188348829}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &225726655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225726653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c15324d49b9f86541a235625650d837c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ArrayPlayer: {fileID: 130692801}
 --- !u!1 &230010018
 GameObject:
   m_ObjectHideFlags: 0
@@ -3467,7 +3511,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &341767887
 Transform:
   m_ObjectHideFlags: 0
@@ -5626,7 +5670,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &542156133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5803,7 +5847,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &553014197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8115,9 +8159,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 414905981}
-        m_TargetAssemblyTypeName: GoogleAds, Assembly-CSharp
-        m_MethodName: ShowAdmobInterstitialAd
+      - m_Target: {fileID: 225726655}
+        m_TargetAssemblyTypeName: DataMageParent, Assembly-CSharp
+        m_MethodName: LoadData
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14478,11 +14522,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   newCharacter: {fileID: 934912866}
+  saveIntArrayIdCharacterInfo: {fileID: 651343796}
   btnMage: {fileID: 1801955369}
   uiGame: {fileID: 1038173987}
-  saveVectorArrayMageParent: {fileID: 125683035}
-  saveIntArrayIdMageParent: {fileID: 553014197}
-  saveIntArrayIdCharacterInfo: {fileID: 651343796}
   tutorial: {fileID: 1326786031}
   BoxParent: {fileID: 1071550676}
   zombieParent: {fileID: 1043326012}
@@ -14539,6 +14581,8 @@ MonoBehaviour:
   hackCoin: 0
   isCheckNext: 0
   isTutorial: 0
+  isVictory: 0
+  isLose: 0
   ItemInfoInt: 
   idTemporary: 0
   SumZombie: 0
@@ -14560,6 +14604,7 @@ Transform:
   - {fileID: 341767887}
   - {fileID: 651343797}
   - {fileID: 670536395}
+  - {fileID: 225726654}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}

@@ -36,10 +36,10 @@ public class SaveVectorArrayMageParent : MonoBehaviour
 
     public void UpSave()
     {
-        if (ArrayPlayer.childCount > 0)
-        {
-            SavePositions();
-        }
+        // if (ArrayPlayer.childCount > 0)
+        // {
+        //     SavePositions();
+        // }
     }
 
     // Update is called once per frame

@@ -12,11 +12,11 @@ public class SaveIntArrayIdCharacterInfo : MonoBehaviour
         public int[] intArray;
     }
     // Đường dẫn của tệp JSON
-    private string filePath;
+    // private string filePath;
     // Start is called before the first frame update
     void Start()
     {
-        filePath = Path.Combine(Application.persistentDataPath, "IntArrayDataIdCharacterInfo.json");
+        // filePath = Path.Combine(Application.persistentDataPath, "IntArrayDataIdCharacterInfo.json");
     }
 
     public void SaveIntegers()
@@ -35,10 +35,10 @@ public class SaveIntArrayIdCharacterInfo : MonoBehaviour
 
         // Chuyển đổi đối tượng wrapper thành chuỗi JSON
         string json = JsonUtility.ToJson(wrapper);
+        PlayerPrefs.SetString("IntArrayDataIdCharacterInfo", json);
+        // // Ghi chuỗi JSON vào tệp
+        // File.WriteAllText(filePath, json);
 
-        // Ghi chuỗi JSON vào tệp
-        File.WriteAllText(filePath, json);
-
-        Debug.Log("Dữ liệu mảng số nguyên đã được lưu vào " + filePath);
+        // Debug.Log("Dữ liệu mảng số nguyên đã được lưu vào " + filePath);
     }
 }

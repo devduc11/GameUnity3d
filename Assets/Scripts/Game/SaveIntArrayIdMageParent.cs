@@ -29,10 +29,10 @@ public class SaveIntArrayIdMageParent : MonoBehaviour
 
     public void UpSave()
     {
-        if (ArrayPlayer.childCount > 0)
-        {
-            SaveIntegers();
-        }
+        // if (ArrayPlayer.childCount > 0)
+        // {
+        //     SaveIntegers();
+        // }
     }
 
     private void SaveIntegers()
